@@ -1,0 +1,340 @@
+﻿@{
+    Layout = null; // Không dùng layout chung
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chuyển tiền VMD Bank</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f8fb;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #ffc0cb, white);
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .header .logo {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .header nav a {
+                margin: 0 15px;
+                color: blue;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .header nav a:hover {
+                    color: red;
+                }
+
+        /* Layout */
+        .container {
+            display: flex;
+            padding: 30px;
+        }
+
+        /* Left Panel: Form */
+        .form-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            flex: 2;
+            margin-right: 30px;
+        }
+
+            .form-panel h2 {
+                margin-bottom: 20px;
+                color: #003b71;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .form-inline span {
+                font-size: 13px;
+                color: gray;
+            }
+
+        .btn {
+            padding: 10px 20px;
+            background: #0066b2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Right Panel */
+        .info-panel {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+            .info-panel .user {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+        .user-icon {
+            width: 50px;
+            height: 50px;
+            background: lightsalmon;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            font-weight: bold;
+        }
+
+        .steps {
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #00aa55;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+        }
+
+        .inactive .circle {
+            background: #ccc;
+        }
+
+        .bill {
+            margin-top: 30px;
+            text-align: center;
+            color: gray;
+        }
+
+            .bill img {
+                width: 100px;
+                opacity: 0.5;
+            }
+
+            .bill button {
+                margin-top: 10px;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                background: white;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: popupIn 0.3s ease-out forwards;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        @@keyframes fadeIn {
+            from
+
+        {
+            background: rgba(0,0,0,0);
+        }
+
+        to {
+            background: rgba(0,0,0,0.4);
+        }
+
+        }
+
+        @@keyframes popupIn {
+            to
+        {
+            opacity: 1;
+            transform: scale(1);
+        }
+        }</style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="img/VMDBANK.png" alt="#" />
+        <nav>
+            <a href="#">Chuyển tiền</a>
+            <a href="#">Thanh toán</a>
+            <a href="#">Đầu tư</a>
+            <a href="#">Mua sắm</a>
+            <a href="#">Dịch vụ thẻ</a>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <!-- Form chuyển tiền -->
+        <div class="form-panel">
+            <h2>Chuyển tiền trong VMDBank</h2>
+
+            <div class="form-group">
+                <label>Từ tài khoản</label>
+                <select>
+                    <option>109880029140 - NGUYEN THI SUONG MAI - Tài khoản thanh toán</option>
+                </select>
+                <div class="form-inline">
+                    <span>Số dư khả dụng: 329 VND</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Số tài khoản</label>
+                <input type="text" placeholder="Vui lòng nhập STK ">
+            </div>
+
+            <div class="form-group">
+                <label>Số tiền giao dịch</label>
+                <input type="text" placeholder="VND">
+            </div>
+
+            <div class="form-group">
+                <label>Thời gian chuyển</label>
+                <select>
+                    <option>Chuyển ngay</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Nội dung</label>
+                <input type="text" value="NGUYEN THI SUONG MAI chuyen tien">
+            </div>
+
+            <button class="btn">Tiếp tục</button>
+        </div>
+
+        <!-- Thông tin người dùng -->
+        <div class="info-panel">
+            <div class="user">
+                <div class="user-icon"></div>
+                <div class="user-info">
+                    NGUYEN THI SUONG MAI<br>
+                    <small>Loyalty</small>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="circle">1</div> Điền thông tin
+                </div>
+                <div class="step inactive">
+                    <div class="circle">2</div> Xác nhận thông tin
+                </div>
+                <div class="step inactive">
+                    <div class="circle">3</div> Kết quả giao dịch
+                </div>
+            </div>
+
+            <div class="bill">
+                <hr>
+                <p><strong>Hóa đơn đến hạn</strong> | Chuyển khoản</p>
+                <img src="https://img.icons8.com/ios-filled/100/000000/waiting-room.png" alt="Relax">
+                <p>Quý khách chưa có hóa đơn nào đến hạn. Hãy thư giãn.</p>
+                <button>Thiết lập hóa đơn mới</button>
+
+                <!-- Modal xác nhận giao dịch -->
+                <div id="confirmModal" class="modal">
+                    <div class="modal-content">
+                        <h3>Xác nhận giao dịch chuyển tiền</h3>
+                        <p>Bạn có chắc chắn muốn thực hiện giao dịch này không?</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="submitTransfer()" style="padding: 10px 20px; background: #0066b2; color: white; border: none; border-radius: 5px; cursor: pointer;">Xác nhận</button>
+                            <button onclick="closeModal()" style="padding: 10px 20px; background: #ccc; color: #333; border: none; border-radius: 5px; margin-left: 10px; cursor: pointer;">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+</body>
+</html>
+<script>
+    const modal = document.getElementById("confirmModal");
+
+    document.querySelector(".btn").addEventListener("click", function(event) {
+      event.preventDefault();
+      modal.style.display = "flex";
+
+      // Làm mới animation cho mượt
+      const modalContent = modal.querySelector(".modal-content");
+      modalContent.style.animation = 'none';
+      void modalContent.offsetWidth; // Force reflow
+      modalContent.style.animation = 'popupIn 0.3s ease-out forwards';
+    });
+
+    function submitTransfer() {
+      alert("Giao dịch đang được xử lý...");
+      modal.style.display = "none";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+</script>
+
